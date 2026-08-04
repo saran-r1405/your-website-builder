@@ -76,9 +76,15 @@ export function Mood() {
                     </span>
                   ))}
                 </div>
-                <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-4 py-2 text-sm font-medium text-white shadow-glow">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Add to shelf
+                <button
+                  onClick={() => {
+                    if (add(pick.book)) toast.success(`Added "${pick.book}" to your shelf`);
+                    else toast(`"${pick.book}" is already on your shelf`);
+                  }}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.03]"
+                >
+                  {saved ? <Check className="h-3.5 w-3.5" /> : <Sparkles className="h-3.5 w-3.5" />}
+                  {saved ? "On your shelf" : "Add to shelf"}
                 </button>
               </div>
             </div>
