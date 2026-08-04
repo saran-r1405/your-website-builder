@@ -299,7 +299,7 @@ function FloatingBooks() {
   ];
   const { add } = useShelf();
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
+    <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {items.map((it, i) => (
         <div
           key={i}

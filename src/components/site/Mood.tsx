@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { SectionHeader } from "./Features";
-import { Smile, Frown, Zap, Coffee, Compass, Heart, CloudRain, Sparkles } from "lucide-react";
+import { Smile, Frown, Zap, Coffee, Compass, Heart, CloudRain, Sparkles, Check } from "lucide-react";
+import { useShelf } from "@/lib/shelf";
 
 const moods = [
   { key: "happy", label: "Happy", icon: Smile, book: "The House in the Cerulean Sea" },
