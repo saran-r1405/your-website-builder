@@ -17,8 +17,10 @@ const moods = [
 export function Mood() {
   const [active, setActive] = useState("curious");
   const pick = moods.find((m) => m.key === active)!;
+  const { items, add } = useShelf();
+  const saved = items.includes(pick.book);
   return (
-    <section className="relative py-32">
+    <section id="mood" className="relative py-32">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader
           tag="Mood recommendation"
