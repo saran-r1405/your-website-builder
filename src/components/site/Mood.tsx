@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { SectionHeader } from "./Features";
-import { Smile, Frown, Zap, Coffee, Compass, Heart, CloudRain, Sparkles } from "lucide-react";
+import { Smile, Frown, Zap, Coffee, Compass, Heart, CloudRain, Sparkles, Check } from "lucide-react";
+import { useShelf } from "@/lib/shelf";
 
 const moods = [
   { key: "happy", label: "Happy", icon: Smile, book: "The House in the Cerulean Sea" },
@@ -15,8 +17,10 @@ const moods = [
 export function Mood() {
   const [active, setActive] = useState("curious");
   const pick = moods.find((m) => m.key === active)!;
+  const { items, add } = useShelf();
+  const saved = items.includes(pick.book);
   return (
-    <section className="relative py-32">
+    <section id="mood" className="relative py-32">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader
           tag="Mood recommendation"
@@ -72,9 +76,15 @@ export function Mood() {
                     </span>
                   ))}
                 </div>
-                <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-4 py-2 text-sm font-medium text-white shadow-glow">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Add to shelf
+                <button
+                  onClick={() => {
+                    if (add(pick.book)) toast.success(`Added "${pick.book}" to your shelf`);
+                    else toast(`"${pick.book}" is already on your shelf`);
+                  }}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.03]"
+                >
+                  {saved ? <Check className="h-3.5 w-3.5" /> : <Sparkles className="h-3.5 w-3.5" />}
+                  {saved ? "On your shelf" : "Add to shelf"}
                 </button>
               </div>
             </div>

@@ -1,6 +1,11 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Sparkles, Check } from "lucide-react";
+import { toast } from "sonner";
 
 export function CTA() {
+  const [email, setEmail] = useState("");
+  const [joined, setJoined] = useState(false);
+
   return (
     <section id="cta" className="relative py-32">
       <div className="mx-auto max-w-5xl px-4">
@@ -19,23 +24,42 @@ export function CTA() {
             Join the private beta and let BookMatch AI build your Reading DNA in under a minute.
           </p>
 
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mx-auto mt-8 flex max-w-lg flex-col items-stretch gap-2 sm:flex-row"
-          >
-            <input
-              type="email"
-              placeholder="you@bookworm.com"
-              className="glass-strong flex-1 rounded-full px-5 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:glow-ring"
-            />
-            <button
-              type="submit"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-6 py-3 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.03]"
+          {joined ? (
+            <div className="mx-auto mt-8 flex max-w-lg items-center justify-center gap-2 rounded-full glass px-5 py-3 text-sm">
+              <Check className="h-4 w-4 text-brand-3" />
+              You're on the list — we'll email {email} with your invite.
+            </div>
+          ) : (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                  toast.error("Please enter a valid email address");
+                  return;
+                }
+                setJoined(true);
+                toast.success("You're on the early access list!", {
+                  description: `Invite heading to ${email}.`,
+                });
+              }}
+              className="mx-auto mt-8 flex max-w-lg flex-col items-stretch gap-2 sm:flex-row"
             >
-              Get early access
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
-          </form>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@bookworm.com"
+                className="glass-strong flex-1 rounded-full px-5 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:glow-ring"
+              />
+              <button
+                type="submit"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand-2 to-brand-3 px-6 py-3 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.03]"
+              >
+                Get early access
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>

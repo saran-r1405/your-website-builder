@@ -3,7 +3,7 @@ import { Flame, BookMarked, Timer, Target, Trophy, Sparkles } from "lucide-react
 
 export function Dashboard() {
   return (
-    <section className="relative py-32">
+    <section id="dashboard" className="relative py-32">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader
           tag="AI Dashboard"
