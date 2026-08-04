@@ -1,4 +1,27 @@
 import { BookOpen, Github, Linkedin, Twitter } from "lucide-react";
+import { scrollToId } from "@/lib/shelf";
+
+const productLinks: { label: string; id: string }[] = [
+  { label: "Features", id: "features" },
+  { label: "Engine", id: "engine" },
+  { label: "Reading DNA", id: "dna" },
+  { label: "Galaxy", id: "galaxy" },
+  { label: "Dashboard", id: "dashboard" },
+];
+
+const companyLinks: { label: string; id?: string; href?: string }[] = [
+  { label: "About", id: "about" },
+  { label: "Mission", id: "engine" },
+  { label: "Contact", href: "mailto:hello@bookmatch.ai" },
+  { label: "Privacy", id: "cta" },
+  { label: "Terms", id: "cta" },
+];
+
+const socials = [
+  { Icon: Github, href: "https://github.com", label: "GitHub" },
+  { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { Icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+];
 
 export function Footer() {
   return (
@@ -19,8 +42,51 @@ export function Footer() {
               content-based filtering, collaborative signals, and semantic embeddings.
             </p>
           </div>
-          <FooterCol title="Product" links={["Features", "Engine", "Reading DNA", "Galaxy", "Dashboard"]} />
-          <FooterCol title="Company" links={["About", "Mission", "Contact", "Privacy", "Terms"]} />
+
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest text-foreground">
+              Product
+            </div>
+            <ul className="mt-4 space-y-2 text-sm">
+              {productLinks.map((l) => (
+                <li key={l.label}>
+                  <button
+                    onClick={() => scrollToId(l.id)}
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {l.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest text-foreground">
+              Company
+            </div>
+            <ul className="mt-4 space-y-2 text-sm">
+              {companyLinks.map((l) => (
+                <li key={l.label}>
+                  {l.href ? (
+                    <a
+                      href={l.href}
+                      className="text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => scrollToId(l.id!)}
+                      className="text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {l.label}
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 sm:flex-row">
@@ -28,37 +94,21 @@ export function Footer() {
             © {new Date().getFullYear()} BookMatch AI. All rights reserved.
           </div>
           <div className="flex items-center gap-2">
-            {[Github, Linkedin, Twitter].map((I, i) => (
+            {socials.map(({ Icon, href, label }) => (
               <a
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={label}
                 className="flex h-9 w-9 items-center justify-center rounded-full glass text-muted-foreground transition-all hover:text-foreground hover:glow-ring"
               >
-                <I className="h-4 w-4" />
+                <Icon className="h-4 w-4" />
               </a>
             ))}
           </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <div className="text-xs font-semibold uppercase tracking-widest text-foreground">
-        {title}
-      </div>
-      <ul className="mt-4 space-y-2 text-sm">
-        {links.map((l) => (
-          <li key={l}>
-            <a href="#" className="text-muted-foreground transition-colors hover:text-foreground">
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
