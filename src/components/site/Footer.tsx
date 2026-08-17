@@ -1,5 +1,8 @@
 import { BookOpen, Github, Linkedin, Twitter } from "lucide-react";
-import { scrollToId } from "@/lib/shelf";
+const scrollToId = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+};
 
 const productLinks: { label: string; id: string }[] = [
   { label: "Features", id: "features" },

@@ -1,58 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AmbientBackground } from "@/components/site/Background";
 import { Navbar } from "@/components/site/Navbar";
-import { Hero } from "@/components/site/Hero";
-import { Features } from "@/components/site/Features";
-import { Engine } from "@/components/site/Engine";
-import { ReadingDNA } from "@/components/site/ReadingDNA";
-import { Galaxy } from "@/components/site/Galaxy";
-import { Mood } from "@/components/site/Mood";
-import { Dashboard } from "@/components/site/Dashboard";
-import { Testimonials } from "@/components/site/Testimonials";
-import { CTA } from "@/components/site/CTA";
-import { Footer } from "@/components/site/Footer";
 import { Chatbot } from "@/components/site/Chatbot";
+import { useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { useProfile } from "@/hooks/useProfile";
+import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "BookMatch AI — Discover your next favorite book with AI" },
-      {
-        name: "description",
-        content:
-          "BookMatch AI understands your reading personality and recommends books you'll love using ML, NLP, and hybrid recommendation engines.",
-      },
-      { property: "og:title", content: "BookMatch AI — Personalized book recommendations powered by AI" },
-      {
-        property: "og:description",
-        content:
-          "Reading DNA, semantic search, and an AI Librarian in one premium reading experience.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
   component: Index,
 });
 
 function Index() {
+  const { profile, isLoading, isError } = useProfile();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !profile && !isError) {
+      navigate({ to: "/onboarding", replace: true });
+    }
+  }, [profile, isLoading, isError, navigate]);
+
+  if (isLoading || !profile) {
+    return (
+      <div className="flex flex-col gap-4 h-screen items-center justify-center bg-background text-white">
+        <Loader2 className="h-8 w-8 text-brand animate-spin" />
+        <div className="text-sm text-muted-foreground animate-pulse">Loading your personalized experience...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="dark relative min-h-screen text-foreground">
+    <div className="dark relative min-h-screen text-foreground bg-background flex flex-col">
       <AmbientBackground />
       <Navbar />
-      <main>
-        <Hero />
-        <Features />
-        <Engine />
-        <ReadingDNA />
-        <Galaxy />
-        <Mood />
-        <Dashboard />
-        <Testimonials />
-        <CTA />
+      
+      <main className="flex-1 w-full pt-16 px-4 md:px-8">
+        <Chatbot />
       </main>
-      <Footer />
-      <Chatbot />
     </div>
   );
 }

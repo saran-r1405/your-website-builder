@@ -3,7 +3,15 @@ import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
-  const queryClient = new QueryClient();
+  console.log("[STARTUP] Initializing QueryClient & Router");
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1, // Only retry once, don't retry forever
+        networkMode: 'always', // Never pause queries even if webview reports offline
+      },
+    },
+  });
 
   const router = createRouter({
     routeTree,

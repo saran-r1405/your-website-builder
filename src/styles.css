@@ -214,3 +214,11 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: oklch(0.99 0 0 / 0.1); border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: oklch(0.99 0 0 / 0.2); }
+
+/* Mobile Safe Areas */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}

@@ -10,33 +10,219 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as DiscoverRouteImport } from './routes/discover'
+import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as GoalsRouteImport } from './routes/goals'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as LibraryRouteImport } from './routes/library'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as ReadingRouteImport } from './routes/reading'
+import { Route as ReadingListRouteImport } from './routes/reading-list'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as StatisticsRouteImport } from './routes/statistics'
+import { Route as BookIdRouteImport } from './routes/book/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiscoverRoute = DiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoalsRoute = GoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReadingRoute = ReadingRouteImport.update({
+  id: '/reading',
+  path: '/reading',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReadingListRoute = ReadingListRouteImport.update({
+  id: '/reading-list',
+  path: '/reading-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatisticsRoute = StatisticsRouteImport.update({
+  id: '/statistics',
+  path: '/statistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookIdRoute = BookIdRouteImport.update({
+  id: '/book/$id',
+  path: '/book/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
+  '/discover': typeof DiscoverRoute
+  '/favorites': typeof FavoritesRoute
+  '/features': typeof FeaturesRoute
+  '/goals': typeof GoalsRoute
+  '/history': typeof HistoryRoute
+  '/library': typeof LibraryRoute
+  '/menu': typeof MenuRoute
+  '/onboarding': typeof OnboardingRoute
+  '/reading': typeof ReadingRoute
+  '/reading-list': typeof ReadingListRoute
+  '/search': typeof SearchRoute
+  '/statistics': typeof StatisticsRoute
+  '/book/$id': typeof BookIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
+  '/discover': typeof DiscoverRoute
+  '/favorites': typeof FavoritesRoute
+  '/features': typeof FeaturesRoute
+  '/goals': typeof GoalsRoute
+  '/history': typeof HistoryRoute
+  '/library': typeof LibraryRoute
+  '/menu': typeof MenuRoute
+  '/onboarding': typeof OnboardingRoute
+  '/reading': typeof ReadingRoute
+  '/reading-list': typeof ReadingListRoute
+  '/search': typeof SearchRoute
+  '/statistics': typeof StatisticsRoute
+  '/book/$id': typeof BookIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
+  '/discover': typeof DiscoverRoute
+  '/favorites': typeof FavoritesRoute
+  '/features': typeof FeaturesRoute
+  '/goals': typeof GoalsRoute
+  '/history': typeof HistoryRoute
+  '/library': typeof LibraryRoute
+  '/menu': typeof MenuRoute
+  '/onboarding': typeof OnboardingRoute
+  '/reading': typeof ReadingRoute
+  '/reading-list': typeof ReadingListRoute
+  '/search': typeof SearchRoute
+  '/statistics': typeof StatisticsRoute
+  '/book/$id': typeof BookIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/categories'
+    | '/discover'
+    | '/favorites'
+    | '/features'
+    | '/goals'
+    | '/history'
+    | '/library'
+    | '/menu'
+    | '/onboarding'
+    | '/reading'
+    | '/reading-list'
+    | '/search'
+    | '/statistics'
+    | '/book/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/categories'
+    | '/discover'
+    | '/favorites'
+    | '/features'
+    | '/goals'
+    | '/history'
+    | '/library'
+    | '/menu'
+    | '/onboarding'
+    | '/reading'
+    | '/reading-list'
+    | '/search'
+    | '/statistics'
+    | '/book/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/categories'
+    | '/discover'
+    | '/favorites'
+    | '/features'
+    | '/goals'
+    | '/history'
+    | '/library'
+    | '/menu'
+    | '/onboarding'
+    | '/reading'
+    | '/reading-list'
+    | '/search'
+    | '/statistics'
+    | '/book/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesRoute: typeof CategoriesRoute
+  DiscoverRoute: typeof DiscoverRoute
+  FavoritesRoute: typeof FavoritesRoute
+  FeaturesRoute: typeof FeaturesRoute
+  GoalsRoute: typeof GoalsRoute
+  HistoryRoute: typeof HistoryRoute
+  LibraryRoute: typeof LibraryRoute
+  MenuRoute: typeof MenuRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ReadingRoute: typeof ReadingRoute
+  ReadingListRoute: typeof ReadingListRoute
+  SearchRoute: typeof SearchRoute
+  StatisticsRoute: typeof StatisticsRoute
+  BookIdRoute: typeof BookIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +234,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discover': {
+      id: '/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof DiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goals': {
+      id: '/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof GoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reading': {
+      id: '/reading'
+      path: '/reading'
+      fullPath: '/reading'
+      preLoaderRoute: typeof ReadingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reading-list': {
+      id: '/reading-list'
+      path: '/reading-list'
+      fullPath: '/reading-list'
+      preLoaderRoute: typeof ReadingListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistics': {
+      id: '/statistics'
+      path: '/statistics'
+      fullPath: '/statistics'
+      preLoaderRoute: typeof StatisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/$id': {
+      id: '/book/$id'
+      path: '/book/$id'
+      fullPath: '/book/$id'
+      preLoaderRoute: typeof BookIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesRoute: CategoriesRoute,
+  DiscoverRoute: DiscoverRoute,
+  FavoritesRoute: FavoritesRoute,
+  FeaturesRoute: FeaturesRoute,
+  GoalsRoute: GoalsRoute,
+  HistoryRoute: HistoryRoute,
+  LibraryRoute: LibraryRoute,
+  MenuRoute: MenuRoute,
+  OnboardingRoute: OnboardingRoute,
+  ReadingRoute: ReadingRoute,
+  ReadingListRoute: ReadingListRoute,
+  SearchRoute: SearchRoute,
+  StatisticsRoute: StatisticsRoute,
+  BookIdRoute: BookIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

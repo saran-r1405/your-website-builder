@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SectionHeader } from "./Features";
 import galaxyImg from "@/assets/book-galaxy.jpg";
-import { Sparkles } from "lucide-react";
-import { booksByGenre } from "@/lib/books";
-import { scrollToId } from "@/lib/shelf";
+import { Sparkles, Loader2 } from "lucide-react";
+import { getBooksBySubject, GoogleBook } from "@/lib/googleBooks";
 
 const planets = [
   { l: "Fantasy", x: "18%", y: "40%", s: 3 },
@@ -15,7 +14,20 @@ const planets = [
 
 export function Galaxy() {
   const [sector, setSector] = useState("Sci-Fi");
-  const books = booksByGenre(sector);
+  const [books, setBooks] = useState<GoogleBook[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    getBooksBySubject(sector, 4).then(res => {
+      if (active) {
+        setBooks(res);
+        setLoading(false);
+      }
+    });
+    return () => { active = false; };
+  }, [sector]);
 
   return (
     <section id="galaxy" className="relative py-32">
@@ -67,16 +79,20 @@ export function Galaxy() {
               <div className="font-display text-2xl font-semibold text-gradient">
                 Sector · {sector}
               </div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {books.slice(0, 4).map((b) => (
-                  <span key={b.title} className="glass rounded-full px-3 py-1 text-[11px] text-white/90">
-                    {b.title}
-                  </span>
-                ))}
+              <div className="mt-2 flex flex-wrap gap-2 min-h-[30px] items-center">
+                {loading ? (
+                   <Loader2 className="animate-spin text-white h-5 w-5" />
+                ) : (
+                  books.slice(0, 4).map((b) => (
+                    <span key={b.id} className="glass rounded-full px-3 py-1 text-[11px] text-white/90 max-w-[200px] truncate">
+                      {b.title}
+                    </span>
+                  ))
+                )}
               </div>
             </div>
             <button
-              onClick={() => scrollToId("cta")}
+              onClick={() => document.getElementById("search")?.scrollIntoView()}
               className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm hover:bg-white/10"
             >
               <Sparkles className="h-3.5 w-3.5 text-brand-3" />
